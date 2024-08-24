@@ -30,6 +30,10 @@ public class RadarInteligente {
         return velocidadesPorAcidente;
     }
 
+    public String getVelocidadeMediaFormatada() {
+        return String.format("%.2f", getVelocidadeMediaSemAcidente());
+    }
+
     public float getVelocidadeMediaSemAcidente() {
         return velocidadeMediaSemAcidente;
     }
