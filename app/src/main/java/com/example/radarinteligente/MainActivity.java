@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -14,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     EditText editVelocidade;
     Button btnVerificar;
     TextView textResultado;
-    RadioGroup radioGroup;
+    RadioGroup radioGroup, tipoVeiculoGroup;
 
     // Instanciar classe
     RadarInteligente radarInteligente;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         // Inicialização dos componentes, xml
         editVelocidade = findViewById(R.id.editVelocidade);
         radioGroup = findViewById(R.id.radioGroup);
+        tipoVeiculoGroup = findViewById(R.id.tipoVeiculoGroup);
         btnVerificar = findViewById(R.id.btnVerificar);
         textResultado = findViewById(R.id.textResultado);
 
@@ -62,8 +64,12 @@ public class MainActivity extends AppCompatActivity {
                         return;
                     }
 
+                    int selectedVehicleType = tipoVeiculoGroup.getCheckedRadioButtonId();
+                    RadioButton vehicleTypeBtn = findViewById(selectedVehicleType);
+                    String vehicleType = vehicleTypeBtn.getText().toString();
+
                     // Cadastrar a nova velocidade e o acidente
-                    VelocidadeDao.cadastrarVelocidade(velocidade, acidente);
+                    VelocidadeDao.cadastrarVelocidade(velocidade, acidente, vehicleType);
 
                     // Atualizando a média de velocidade sem acidente
                     radarInteligente.calcularVelocidadeMediaSemAcidente();
